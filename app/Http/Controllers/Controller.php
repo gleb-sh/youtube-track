@@ -10,4 +10,25 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+
+    public $answer = array(
+        'status' => 0,
+        'mess' => null,
+        'error' => null,
+        'data' => array(),
+    );
+
+    public function answerJson() {
+
+        if ($this->answer['status'] === 1) {
+            unset($this->answer['error']);
+        } else {
+            unset($this->answer['data']);
+        }
+
+
+        return response()->json($this->answer);
+    }
+
 }

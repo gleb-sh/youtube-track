@@ -8,6 +8,69 @@
 /***/ (() => {
 
 //require('./bootstrap');
+function getdata(method, data) {
+  var succses = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (ans) {};
+  var getdata = new XMLHttpRequest();
+  getdata.open('POST', '/api/' + method, true);
+  getdata.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+  getdata.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+  getdata.send(JSON.stringify(data));
+
+  getdata.onreadystatechange = function () {
+    if (getdata.readyState != 4) return;
+    ans = JSON.parse(getdata.responseText);
+    console.log(ans);
+    succses(ans);
+  };
+}
+
+document.querySelectorAll('form').forEach(function (form) {
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var method = form.dataset.method;
+    var data = {};
+    form.querySelectorAll('input').forEach(function (input) {
+      data[input.name] = input.value;
+    });
+    getdata(method, data, function (ans) {
+      if (ans.status === 1) {
+        if (ans.mess === 'reload') {
+          window.location.reload();
+        }
+
+        if (ans.mess === 'link') {
+          window.location = ans.data.link;
+        }
+      }
+    });
+    return false;
+  });
+});
+document.querySelectorAll('div[data-click]').forEach(function (div) {
+  div.addEventListener('click', function (e) {
+    var method = div.dataset.click;
+    var data = {};
+    data[div.dataset.name] = div.dataset.content;
+    getdata(method, data, function (ans) {
+      if (ans.status === 1) {
+        if (ans.mess === 'reload') {
+          window.location.reload();
+        }
+
+        if (ans.mess === 'link') {
+          window.location = ans.data.link;
+        }
+      }
+    });
+    return false;
+  });
+});
+document.querySelectorAll('*[data-href]').forEach(function (div) {
+  div.addEventListener('click', function () {
+    window.location = div.dataset.href;
+  });
+});
 
 /***/ }),
 

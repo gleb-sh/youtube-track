@@ -1,3 +1,129 @@
 body {
-  background-color: steelblue;
+  padding: 0;
+  margin: 0;
+  background-color: #e9eff5;
+  font-family: "Montserrat", sans-serif;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.header {
+  width: 100%;
+}
+
+.container {
+  width: 90vw;
+  margin: 0 auto;
+}
+
+.header-nav {
+  height: 60px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-nav_button {
+  font-size: 19px;
+  color: #111;
+  margin: 10px;
+}
+.header-nav_button:hover {
+  color: #ac6161;
+  text-decoration: underline;
+}
+
+h1, h2 {
+  margin-left: 10vw;
+}
+
+.panel {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+.panel input {
+  width: 300px;
+}
+
+.panel-button {
+  box-sizing: border-box;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 23px;
+}
+
+input {
+  min-width: 200px;
+  text-align: center;
+  display: block;
+  box-sizing: border-box;
+  color: #111;
+  padding: 7px 10px;
+  margin: 5px;
+  border: none;
+  background: none;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #111;
+  outline: none;
+  transition: font-size 0.2s ease;
+}
+input:focus {
+  font-size: 17px;
+}
+
+.button {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  outline: none;
+  box-sizing: border-box;
+  display: block;
+  text-align: center;
+  color: #111;
+  background: none;
+  padding: 7px 10px;
+  margin: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #111;
+  border-radius: 15px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.button:hover {
+  background: #111;
+  color: #e9eff5;
+}
+
+.table {
+  margin-top: 10px;
+}
+.table table {
+  width: 100%;
+  text-align: left;
+  font-size: 19px;
+}
+.table table a {
+  text-decoration: underline;
+}
+.table table a:hover {
+  color: #ac6161;
+}
+.table table tbody tr[data-href] {
+  width: 100%;
+  cursor: pointer;
+}
+.table table tbody tr[data-href]:hover {
+  background: #c5c5c583;
 }

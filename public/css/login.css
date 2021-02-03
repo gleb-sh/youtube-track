@@ -1,1 +1,43 @@
+.wrapper {
+  margin: 10vh auto;
+  max-width: 50vw;
+  width: 300px;
+  display: flex;
+  flex-flow: column nowrap;
+}
 
+input, button {
+  margin: 10px 0;
+  text-align: center;
+  background: none;
+  outline: none;
+  padding: 10px;
+  border: none;
+  font-size: 17px;
+}
+
+input {
+  line-height: 32px;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: #111;
+  transition: font-size 0.2s ease-in-out;
+}
+input:focus {
+  font-size: 20px;
+}
+input.error {
+  border-bottom-color: red;
+}
+
+button {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #111;
+  transition: background 0.2s ease-in-out;
+}
+button:hover {
+  background: #111;
+  color: snow;
+}

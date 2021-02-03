@@ -16,7 +16,15 @@ class NoAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!session()->get('user')) {
+        if ( session()->has('user') ) {
+            if ( $request->is('api/*') ) {
+                return response()->json(array(
+                    'status'=>0,
+                ));
+            } else {
+                return redirect('/welcome');
+            }
+        } else {
             return $next($request);
         }
     }

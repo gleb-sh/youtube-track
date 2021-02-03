@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateChanel extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('chanel', function (Blueprint $table) {
             $table->id();
-            $table->string('login');
-            $table->string('password');
-            $table->timestamps();
+            $table->string('name');
+            $table->foreignId('group_id')->constrained('group');            $table->timestamps();
         });
     }
 
@@ -28,6 +27,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('chanel');
     }
 }

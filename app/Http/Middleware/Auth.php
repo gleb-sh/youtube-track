@@ -16,13 +16,15 @@ class Auth
      */
     public function handle(Request $request, Closure $next)
     {
-        if (session()->get('user')) {
+        if (session()->has('user')) {
             return $next($request);
         } else {
             if ( $request->is('api/*') ) {
                 return response()->json(array(
                     'status'=>0,
                 ));
+            } else {
+                return redirect('/');
             }
         }
     }
