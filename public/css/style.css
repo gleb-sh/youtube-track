@@ -110,9 +110,12 @@ input:focus {
   margin-top: 10px;
 }
 .table table {
-  width: 100%;
-  text-align: left;
-  font-size: 19px;
+  min-width: 100%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  overflow-x: scroll;
+  text-align: center;
 }
 .table table a {
   text-decoration: underline;
@@ -120,10 +123,40 @@ input:focus {
 .table table a:hover {
   color: #ac6161;
 }
+.table table th {
+  font-size: 21px;
+  padding: 5px !important;
+}
+.table table tbody {
+  -webkit-user-select: text;
+     -moz-user-select: text;
+      -ms-user-select: text;
+          user-select: text;
+}
+.table table tbody td {
+  padding: 5px !important;
+}
+.table table tbody tr img {
+  height: 60px;
+  width: 60px;
+}
 .table table tbody tr[data-href] {
   width: 100%;
   cursor: pointer;
 }
 .table table tbody tr[data-href]:hover {
   background: #c5c5c583;
+}
+
+.title {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+.title span {
+  margin-left: 10px;
+}
+.title_ava {
+  height: 100px;
+  width: 100px;
 }

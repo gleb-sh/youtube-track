@@ -13,18 +13,18 @@ class UserController extends Controller
         try {
 
             if (
-                env('LARAVEL_ADMIN_USERNAME') === $data['login'] && 
-                env('LARAVEL_ADMIN_PASS') === $data['pass']
+                env('LARAVEL_ADMIN_USERNAME') == $data['login'] && 
+                env('LARAVEL_ADMIN_PASS') == $data['pass']
             ) {
                 session( ['user' => 1]  );
                 $this->answer['status'] = 1;
                 $this->answer['data']['session'] = session()->get('user');
             } else {
-                $this->answer['mess'] = 'fall auth';
+                $this->answer['mess'] = env('LARAVEL_ADMIN_USERNAME');
             }
 
         } catch (\Throwable $th) {
-            $this->answer['error'] = $th->getMessage();
+            $this->answer['error'] = $th->getMessage() . ' ' . $th->getFile() . ' : ' . $th->getLine();
         }
 
         return $this->answerJson();

@@ -9,5 +9,11 @@ class Group extends Model
 {
     use HasFactory;
 
-    protected $table = 'group';
+    protected $table = 'folders';
+    
+    public function channels()
+    {
+        return $this->hasMany(Channel::class,'group_id');
+    }
+
 }

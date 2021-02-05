@@ -17,7 +17,7 @@
             <a href="/settings" class="header-nav_button">
                 <span>Настройки</span>
             </a>
-            <a href="/settings" class="header-nav_button">
+            <a href="/logout" class="header-nav_button">
                 <span>Выход</span>
             </a>
         </div>

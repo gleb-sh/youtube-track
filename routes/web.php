@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\GroupController;
-use App\Http\Controllers\ChanelController;
+use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\UserController;
 
 
@@ -19,6 +19,8 @@ Route::middleware('NoAuth')->group(function() {
 
 });
 
+Route::get('test/{name}',[ChannelController::class,'test']);
+
 
 Route::middleware('Auth')->group(function() {
 
@@ -28,7 +30,7 @@ Route::middleware('Auth')->group(function() {
 
     Route::get('/gr/{group}',[GroupController::class,'showOne']);
 
-    Route::get('/ch/{channel}',[ChanelController::class,'show']);
+    Route::get('/ch/{id}',[ChannelController::class,'show']);
 
     Route::get('settings', function () {
         return view('settings');
@@ -41,8 +43,10 @@ Route::middleware('Auth')->group(function() {
     Route::post('api/group/rename/{id}',[GroupController::class,'rename']);
     Route::post('api/group/delete/{id}',[GroupController::class,'delete']);
 
+    Route::post('api/channel/add',[ChannelController::class,'add']);
+    Route::post('api/channel/delete/{id}',[ChannelController::class,'delete']);
 
-    Route::post('api/getstats',[VideoController::class,'getAll']);
+    //Route::post('api/getstats/{id}',[VideoController::class,'getStats']);
 
 
 

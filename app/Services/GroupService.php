@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\Group;
 
-class GroupService extends BaseServices {
+class GroupService extends BaseService {
 
     public static function create($data) {
         $group = new Group();

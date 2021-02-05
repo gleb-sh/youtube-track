@@ -20,7 +20,7 @@ class GroupController extends Controller
     public function showOne(Request $request, $id)
     {
         $group = GroupRepo::getOne($id);
-        $list = [];
+        $list = $group->channels;
         return view( 'group',compact('group','list') );
     }
 
@@ -34,7 +34,7 @@ class GroupController extends Controller
                 $this->answer['status'] = 1;
             }
         } catch (\Throwable $th) {
-            $this['error'] = $th->getMessage();
+            $this->answer['error'] = $th->getMessage() . ' ' . $th->getFile() . ' : ' . $th->getLine();
         }
 
         return $this->answerJson();
@@ -55,7 +55,7 @@ class GroupController extends Controller
                 $this->answer['status'] = 1;
             }
         } catch (\Throwable $th) {
-            $this['error'] = $th->getMessage();
+            $this->answer['error'] = $th->getMessage() . ' ' . $th->getFile() . ' : ' . $th->getLine();
         }
 
         return $this->answerJson();
@@ -74,7 +74,7 @@ class GroupController extends Controller
                 $this->answer['status'] = 1;
             }
         } catch (\Throwable $th) {
-            $this->answer['error'] = $th->getMessage();
+            $this->answer['error'] = $th->getMessage() . ' ' . $th->getFile() . ' : ' . $th->getLine();
         }
 
         return $this->answerJson();

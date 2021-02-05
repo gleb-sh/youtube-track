@@ -24,7 +24,10 @@ class Controller extends BaseController
         if ($this->answer['status'] === 1) {
             unset($this->answer['error']);
         } else {
-            unset($this->answer['data']);
+            //unset($this->answer['data']);
+            if (!$this->answer['mess']) {
+                $this->answer['mess'] = 'Неизвестная ошибка';
+            }
         }
 
 

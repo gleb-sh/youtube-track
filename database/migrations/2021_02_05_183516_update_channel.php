@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChanel extends Migration
+class UpdateChannel extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateChanel extends Migration
      */
     public function up()
     {
-        Schema::create('chanel', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->foreignId('group_id')->constrained('group');            $table->timestamps();
+        Schema::table('channel', function (Blueprint $table) {
+            $table->renameColumn('name','c_id');
         });
     }
 
@@ -27,6 +25,8 @@ class CreateChanel extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chanel');
+        Schema::table('channel', function (Blueprint $table) {
+            $table->renameColumn('c_id','name');
+        });
     }
 }

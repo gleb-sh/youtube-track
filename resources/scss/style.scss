@@ -102,16 +102,31 @@ input {
 .table {
     margin-top: 10px;
     table {
-        width: 100%;
-        text-align: left;
-        font-size: 19px;
+        min-width: 100%;
+        width: fit-content;
+        overflow-x: scroll;
+        text-align: center;
         a {
             text-decoration: underline;
             &:hover {
                 color: rgb(172, 97, 97);
             }
         }
+        th {
+            font-size: 21px;
+            padding: 5px !important;
+        }
         tbody {
+            user-select: text;
+            td {
+                padding: 5px !important;
+            }
+            tr {
+                img {
+                    height: 60px;
+                    width: 60px;
+                }
+            }
             tr[data-href] {
                 width: 100%;
                 &:hover {
@@ -121,4 +136,17 @@ input {
             }
         }
     }
+}
+.title {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    span {
+        margin-left: 10px;
+    }
+    &_ava {
+        height: 100px;
+        width: 100px;
+    }
+    
 }
