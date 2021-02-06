@@ -14,9 +14,15 @@
 
     <div class="header">
         <div class="header-nav container">
+            <!-- 
             <a href="/settings" class="header-nav_button">
                 <span>Настройки</span>
             </a>
+            -->
+            <a href="#" class="header-nav_button">
+                <span>Настройки</span>
+            </a>
+
             <a href="/logout" class="header-nav_button">
                 <span>Выход</span>
             </a>

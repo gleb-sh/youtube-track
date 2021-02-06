@@ -30,7 +30,32 @@
 <h2>Видео</h2>
 
 
-
+<div class="table container">
+    <table>
+        <thead>
+            <tr>
+                <th>Превью</th>
+                <th>Название</th>
+                <th>Youtube</th>
+                <th>Здесь будут дельты</th>
+                <th>Лайки / дизлайки</th>
+                <th>Комменты</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($list as $item)
+                <tr>
+                    <td><img class="videoPik" src="{{ $item['pik'] }}" alt="{{ $item['title'] }}"></td>
+                    <td>{{ $item['title'] }}</td>
+                    <td><a target="_blank" href="https://youtube.com/video/{{ $item['v_id'] }}">{{ $item['v_id'] }}</a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 
 
 

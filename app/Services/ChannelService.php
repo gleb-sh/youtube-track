@@ -16,9 +16,9 @@ class ChannelService extends BaseService {
     }
 
     public static function getVideoList($c_id) {
-        //
+
         return Youtube::listChannelVideos($c_id, '50');
-        //
+
     } 
 
 
@@ -50,18 +50,23 @@ class ChannelService extends BaseService {
         $channel->save();
 
         // получаем данные о всех видео
-        //
+        $videos = ChannelService::getVideoList($channel['c_id']);
+        // записываем данные о всех видосах
+        foreach ($videos as $video) {
+            // на будущее: добавить в очередь задачу по записи видоса в бд - ?
+            VideoService::newByChannel($video,$channel['id']);
+            sleep(0.04);
+
+        }
 
         // ставим задачу на обновление данных о канале
-        //
+        // ! не ставим. её нужно написать в кернел
 
         // ставим задачу на обновление данных о видео 
-        //
+        // ! не ставим. её нужно написать в кернел
 
         // возвращаем объект с данными о канале
-        // return $channel;
-
-        return false;
+        return $channel;
 
     }
 

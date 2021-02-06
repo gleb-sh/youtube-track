@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\ChannelService;
 use App\Repositories\ChannelRepo;
+use App\Repositories\VideoRepo;
+use App\Repositories\GroupRepo;
 
 class ChannelController extends Controller
 {
@@ -20,7 +22,11 @@ class ChannelController extends Controller
 
         $channel = ChannelRepo::getOneById($id);
 
-        return view('channel',compact('channel'));
+        // список без статистики
+        $list = VideoRepo::getByChannelId($id);
+        // +++ рекурсивный добор статистики
+
+        return view('channel',compact('channel','list'));
     }
     public function add(Request $request)
     {
@@ -33,7 +39,8 @@ class ChannelController extends Controller
 
             if ($channel = ChannelRepo::getOneByYid($data['name'])) {
 
-                $group = Group::getOne($channel['group_id']);
+                // здесь нужен рефакторинг (вывести в отношения или join)
+                $group = GroupRepo::getOne($channel['group_id']);
 
                 $this->answer['mess'] = 'Канал уже добавлен в группу ' . $group['name'];
     

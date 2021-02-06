@@ -18,9 +18,9 @@
 <form class="panel container" data-method="group/rename/{{ $group['id'] }}">
     <input type="text" name="name" value="{{ $group['name'] }}">
     <button class="panel-button button">Переименовать группу</button>
-    <!--
+
     <div class="panel-button button" data-click="group/delete/{{ $group['id'] }}" data-name="name" data-content="{{ $group['name'] }}">Удалить группу</div>
-    -->
+
 </form>
 
 <h2>Каналы</h2>

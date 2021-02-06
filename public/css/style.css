@@ -140,6 +140,10 @@ input:focus {
   height: 60px;
   width: 60px;
 }
+.table table tbody tr img.videoPik {
+  height: 90px;
+  width: 120px;
+}
 .table table tbody tr[data-href] {
   width: 100%;
   cursor: pointer;
