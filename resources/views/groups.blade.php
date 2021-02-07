@@ -15,7 +15,7 @@
 </form>
 
 <div class="table container">
-    <table>
+    <table style="text-align: left;">
         <thead>
             <tr>
                 <th>Название группы</th>

@@ -21,9 +21,13 @@ class ChannelController extends Controller
         # show channel with data & without stats (for stats use api - getstats)
 
         $channel = ChannelRepo::getOneById($id);
-
+        // параметры сортировки
+        $sort = [
+            'by'=>'pub_date',
+            'type'=>'desc',
+        ];
         // список без статистики
-        $list = VideoRepo::getByChannelId($id);
+        $list = VideoRepo::getByChannelId($id,$sort);
         // +++ рекурсивный добор статистики
 
         return view('channel',compact('channel','list'));

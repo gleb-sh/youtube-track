@@ -7,9 +7,13 @@ use App\Models\Video;
 
 class VideoRepo extends BaseRepo {
     
-    public static function getByChannelId($id) {
-        return Video::where(['in_table'=>true])->get();
-        //return Group::select(['id','name'])->orderByDesc('id')->get();
+    public static function getByChannelId($id,$sort = null) {
+        return Video::where([
+            'in_table'=>true,
+            'channel_id'=>$id,
+            ])
+            ->orderBy($sort['by'],$sort['type'])
+            ->get();
     }
 
 }

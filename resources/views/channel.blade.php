@@ -37,6 +37,7 @@
                 <th>Превью</th>
                 <th>Название</th>
                 <th>Youtube</th>
+                <th>Прирост за 24 часа</th>
                 <th>Здесь будут дельты</th>
                 <th>Лайки / дизлайки</th>
                 <th>Комменты</th>
@@ -48,6 +49,7 @@
                     <td><img class="videoPik" src="{{ $item['pik'] }}" alt="{{ $item['title'] }}"></td>
                     <td>{{ $item['title'] }}</td>
                     <td><a target="_blank" href="https://youtube.com/video/{{ $item['v_id'] }}">{{ $item['v_id'] }}</a></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>

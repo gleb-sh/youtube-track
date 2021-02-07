@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Channel;
 use App\Repositories\ChannelRepo;
 use Alaouy\Youtube\Facades\Youtube;
+use App\Services\VideoService;
 
 class ChannelService extends BaseService {
 

@@ -13,7 +13,9 @@ class VideoService extends BaseService {
         $v = new Video;
         $v->v_id = $data->id->videoId;
         $v->channel_id = $id;
+        $v->c_id = $data->snippet->channelId;
         $v->title = $data->snippet->title;
+        $v->pub_date = $data->snippet->publishedAt;
         $v->pik = $data->snippet->thumbnails->default->url;
         //$v->comment_count = $data;
         //$v->like_count = $data;
