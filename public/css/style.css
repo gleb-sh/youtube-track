@@ -164,3 +164,101 @@ input:focus {
   height: 100px;
   width: 100px;
 }
+
+.afterwait, .preloader {
+  display: none;
+}
+.afterwait.active, .preloader.active {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999;
+  background: #111;
+}
+
+.afterwait {
+  justify-content: space-evenly;
+}
+.afterwait_title {
+  color: snow;
+  font-size: 21px;
+  margin-bottom: 20px;
+}
+.afterwait_subtitle {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.afterwait_subtitle .afterwait__close {
+  letter-spacing: 0.05em;
+  font-size: 17px;
+  cursor: pointer;
+  margin-top: 10px;
+  color: #e9eff5;
+}
+.afterwait_subtitle .afterwait__close:hover {
+  text-decoration: underline;
+}
+.afterwait_subtitle span {
+  font-size: 20px;
+  color: goldenrod;
+}
+.afterwait_text {
+  color: #e9eff5;
+  font-size: 12px;
+}
+
+.preloader_title {
+  color: #e9eff5;
+  font-size: 21px;
+}
+.preloader_circle {
+  height: 100px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.preloader_circle span {
+  font-weight: bold;
+  -webkit-animation-name: circle;
+          animation-name: circle;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+  -webkit-animation-delay: -1s;
+          animation-delay: -1s;
+  color: goldenrod;
+  font-size: 17px;
+}
+
+@-webkit-keyframes circle {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes circle {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

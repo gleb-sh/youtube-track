@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
+
     <form autocomplete="off" class="wrapper">
         <input type="hidden" name="valid" value="">
         <input type="text" name="login" placeholder="Логин">

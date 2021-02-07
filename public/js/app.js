@@ -10,6 +10,8 @@
 //require('./bootstrap');
 function getdata(method, data) {
   var succses = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (ans) {};
+  var preloader = document.querySelector('.preloader');
+  preloader.classList.add('active');
   var getdata = new XMLHttpRequest();
   getdata.open('POST', '/api/' + method, true);
   getdata.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
@@ -20,8 +22,19 @@ function getdata(method, data) {
     if (getdata.readyState != 4) return;
     ans = JSON.parse(getdata.responseText);
     console.log(ans);
+    preloader.classList.remove('active');
     succses(ans);
   };
+}
+
+function showError(ans) {
+  var afterwait = document.querySelector('.afterwait');
+  afterwait.querySelector('.afterwait_subtitle > span').innerHTML = ans.mess;
+  if (ans.mess != null) afterwait.querySelector('.afterwait_text').innerHTML = 'DEBUG: ' + ans.error;
+  afterwait.classList.add('active');
+  afterwait.querySelector('.afterwait__close').addEventListener('click', function () {
+    afterwait.classList.remove('active');
+  });
 }
 
 document.querySelectorAll('form').forEach(function (form) {
@@ -42,6 +55,8 @@ document.querySelectorAll('form').forEach(function (form) {
         if (ans.mess === 'link') {
           window.location = ans.data.link;
         }
+      } else {
+        showError(ans);
       }
     });
     return false;
@@ -61,6 +76,8 @@ document.querySelectorAll('div[data-click]').forEach(function (div) {
         if (ans.mess === 'link') {
           window.location = ans.data.link;
         }
+      } else {
+        showError(ans);
       }
     });
     return false;
