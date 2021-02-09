@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\GroupService;
 use App\Services\ChannelService;
+use App\Services\VideoService;
+use App\Services\ViewService;
+use App\Repositories\GroupRepo;
 use App\Repositories\ChannelRepo;
 use App\Repositories\VideoRepo;
-use App\Services\VideoService;
-use App\Services\GroupService;
-use App\Repositories\GroupRepo;
+use App\Repositories\ViewRepo;
 use Alaouy\Youtube\Facades\Youtube;
 
 class ChannelController extends Controller
@@ -19,8 +21,10 @@ class ChannelController extends Controller
         //$data = ChannelService::getVideoList($name);
         //$data = $data[0]->id->videoId;
         //$data = Youtube::getVideoInfo($name);
-        $data = Youtube::getVideoInfo($name);
-        $data = $data->statistics;
+        //$data = Youtube::getVideoInfo($name);
+        //$data = $data->statistics;
+
+        //$data = ViewService::getTestStats($name);
 
         return view('vardump',compact('data'));
     }
@@ -36,6 +40,7 @@ class ChannelController extends Controller
         ];
         // список без статистики
         $list = VideoRepo::getByChannelId($id,$sort);
+        $list->toArray();
 
         return view('channel',compact('channel','list'));
     }

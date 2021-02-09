@@ -9,12 +9,26 @@ use Alaouy\Youtube\Facades\Youtube;
 
 class VideoService extends BaseService {
 
-    public static function getInfoAll($YID) {
+    public static function setDayUp($id,$up)
+    {
+        $v = Video::where([
+            'id'=>$id,
+        ])->first();
+
+        $v->view_up = $up;
+        $v->save();
+        return true;
+        
+    }
+
+    public static function getInfoAll($YID)
+    {
         // тестовый метод
         return Youtube::getVideoInfo($YID);
     }
 
-    public static function getInfo($YID) {
+    public static function getInfo($YID)
+    {
         // временно не используется
 
         $data = Youtube::getVideoInfo($YID);
@@ -35,7 +49,8 @@ class VideoService extends BaseService {
 
     }
 
-    public static function newByChannel($v_id,$cannel_id) {
+    public static function newByChannel($v_id,$cannel_id)
+    {
 
         $data = Youtube::getVideoInfo($v_id);
 
@@ -65,7 +80,8 @@ class VideoService extends BaseService {
     }
 
     // метод обновления видео вызвается из updateAll
-    public static function update($v) {
+    public static function update($v)
+    {
 
         $data = Youtube::getVideoInfo($v['c_id']);
 
@@ -92,7 +108,8 @@ class VideoService extends BaseService {
 
     // метод обновления всех видео, вызвается каждый час из Kernel
 
-    public static function updateAll() {
+    public static function updateAll() 
+    {
         // ищем все видосы, не исключенные из отслеживания
         $videos = Video::where([
             'in_check'=>true,
