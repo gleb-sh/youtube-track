@@ -18,25 +18,11 @@ class ChannelController extends Controller
     public function test(Request $request, string $name)
     {
 
-        $id = $name;
+        //$data = VideoService::updateAll();
 
-        $list = ChannelService::show($id);
+        $data = Youtube::getVideoInfo($name);
 
-        // создать объект статистики
-        $stats = [];
-        // перебрать list
-        foreach ($list as $item) {
-            // вызвать отношение view под условием (limit 24)
-            $view = ViewService::getStats($item['id']);
-            // добавить его в объект статистики
-
-            foreach ($view as $v) {
-                $stats[ $item['id'] ][ $view[0]['time_to'] ] = $view[0]['count_up'];
-            }
-
-        }
-
-        $data = $stats;
+        $data = $data->id;
 
         return view('vardump',compact('data'));
     }

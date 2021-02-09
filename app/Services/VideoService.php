@@ -83,9 +83,9 @@ class VideoService extends BaseService {
     public static function update($v)
     {
 
-        $data = Youtube::getVideoInfo($v['c_id']);
+        $data = Youtube::getVideoInfo($v['v_id']);
 
-        $v->v_id = $data->id->videoId;
+        $v->v_id = $data->id;
         $v->c_id = $data->snippet->channelId;
         $v->title = $data->snippet->title;
         $v->pub_date = $data->snippet->publishedAt;
@@ -121,5 +121,7 @@ class VideoService extends BaseService {
         // перебираем все видосы и проверяем на конрольные значения
         // исключаем из отслеживания те, которые не могу нормально набрать
         // исключаем из вывода те, которые тоже не могут нормально набрать
+
+        return true;
     }
 }
