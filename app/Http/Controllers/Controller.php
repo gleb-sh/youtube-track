@@ -25,7 +25,7 @@ class Controller extends BaseController
             unset($this->answer['error']);
         } else {
             //unset($this->answer['data']);
-            if (!$this->answer['mess']) {
+            if ($this->answer['mess'] == null) {
                 $this->answer['mess'] = 'Неизвестная ошибка';
             }
         }

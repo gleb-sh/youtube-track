@@ -46,9 +46,15 @@ class VideoService extends BaseService {
         $v->title = $data->snippet->title;
         $v->pub_date = $data->snippet->publishedAt;
         $v->pik = $data->snippet->thumbnails->default->url;
-        $v->comment_count = $data->statistics->commentCount;
-        $v->like_count = $data->statistics->likeCount;
-        $v->dislike_count = $data->statistics->dislikeCount;
+        if (isset($data->statistics->commentCount)) {
+            $v->comment_count = $data->statistics->commentCount;
+        }
+        if (isset($data->statistics->likeCount)) {
+            $v->like_count = $data->statistics->likeCount;
+        }
+        if (isset($data->statistics->dislikeCount)) {
+            $v->dislike_count = $data->statistics->dislikeCount;
+        }
         $v->save();
 
         // ++ забор просмотров в нужную таблицу
@@ -68,9 +74,15 @@ class VideoService extends BaseService {
         $v->title = $data->snippet->title;
         $v->pub_date = $data->snippet->publishedAt;
         $v->pik = $data->snippet->thumbnails->default->url;
-        $v->comment_count = $data->statistics->commentCount;
-        $v->like_count = $data->statistics->likeCount;
-        $v->dislike_count = $data->statistics->dislikeCount;
+        if (isset($data->statistics->commentCount)) {
+            $v->comment_count = $data->statistics->commentCount;
+        }
+        if (isset($data->statistics->likeCount)) {
+            $v->like_count = $data->statistics->likeCount;
+        }
+        if (isset($data->statistics->dislikeCount)) {
+            $v->dislike_count = $data->statistics->dislikeCount;
+        }
         $v->save();
         // ++ забор просмотров в нужную таблицу
 

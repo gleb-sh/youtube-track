@@ -53,8 +53,12 @@
                     -->
                     <td></td>
                     <td></td>
-                    <td>{{  round( $item['like_count'] / $item['dislike_count'], 2) }}</td>
-                    <td>{{ $item['comment_count'] }}</td>
+                    @if (isset ($item['like_count'] ) && isset($item['dislike_count']) && $item['dislike_count'] != 0 ) 
+                        <td>{{  round( $item['like_count'] / $item['dislike_count'], 2) }}</td>
+                    @endif
+                    @isset($item['comment_count'])
+                        <td>{{ $item['comment_count'] }}</td>
+                    @endisset
                 </tr>
             @endforeach
         </tbody>

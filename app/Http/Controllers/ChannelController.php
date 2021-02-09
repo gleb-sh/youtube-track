@@ -77,7 +77,7 @@ class ChannelController extends Controller
 
         } catch (\Throwable $th) {
             $this->answer['error'] = $th->getMessage() . ' ' . $th->getFile() . ' : ' . $th->getLine();
-            $this->answer['data'] = $th->getTrace();
+            $this->answer['data'] = $th->getTraceAsString();
         }
 
         return $this->answerJson();
