@@ -25,6 +25,20 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+
+        // $schedule->command('php artisan queue:work');
+
+        // обновление данных о существующих видео
+
+        $schedule->call(function () {
+            VideoService::updateAll();
+        })->hourly();
+
+        // обновление данных о существующих каналах
+
+        // поиск новых видео
+
+        
     }
 
     /**

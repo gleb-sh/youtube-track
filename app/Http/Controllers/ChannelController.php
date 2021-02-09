@@ -6,13 +6,21 @@ use Illuminate\Http\Request;
 use App\Services\ChannelService;
 use App\Repositories\ChannelRepo;
 use App\Repositories\VideoRepo;
+use App\Services\VideoService;
+use App\Services\GroupService;
 use App\Repositories\GroupRepo;
 
 class ChannelController extends Controller
 {
-    public function test(Request $request, string $name) {
+    public function test(Request $request, string $name)
+    {
 
-        $data = ChannelService::getVideoList($name);
+        $data = GroupService::delete($name);
+
+        //$data = GroupRepo::getOne($name);
+
+        //$data = ChannelService::getVideoList($name);
+
 
         return view('vardump',compact('data'));
     }
@@ -28,7 +36,6 @@ class ChannelController extends Controller
         ];
         // список без статистики
         $list = VideoRepo::getByChannelId($id,$sort);
-        // +++ рекурсивный добор статистики
 
         return view('channel',compact('channel','list'));
     }
@@ -73,5 +80,21 @@ class ChannelController extends Controller
         }
 
         return $this->answerJson();
+    }
+    public function delete(Request $request, string $id)
+    {
+
+        try {
+            if ($result = ChannelService::delete(ChannelRepo::getOneById($id)) ) {
+                $this->answer['mess'] = 'link';
+                $this->answer['data']['link'] = '/gr/' . $result;
+                $this->answer['status'] = 1;
+            }
+        } catch (\Throwable $th) {
+            $this->answer['error'] = $th->getMessage() . ' ' . $th->getFile() . ' : ' . $th->getLine();
+        }
+
+        return $this->answerJson();
+
     }
 }

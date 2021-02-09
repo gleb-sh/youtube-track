@@ -10,4 +10,9 @@ class Channel extends Model
     use HasFactory;
 
     protected $table = 'channel';
+
+    public function videos()
+    {
+        return $this->hasMany(Video::class,'channel_id');
+    }
 }

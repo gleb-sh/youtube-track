@@ -46,7 +46,8 @@ Route::middleware('Auth')->group(function() {
     Route::post('api/channel/add',[ChannelController::class,'add']);
     Route::post('api/channel/delete/{id}',[ChannelController::class,'delete']);
 
-    //Route::post('api/getstats/{id}',[VideoController::class,'getStats']);
+    Route::post('api/getstats/delta',[VideoController::class,'delta']);
+    Route::post('api/getstats/dayup',[VideoController::class,'dayup']);
 
 
 

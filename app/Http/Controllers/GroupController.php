@@ -63,12 +63,8 @@ class GroupController extends Controller
 
     public function delete(Request $request, $id) {
 
-        $data = $request->json()->all();
-
-        $data = ['id' => $id];
-
         try {
-            if (GroupService::delete($data)) {
+            if (GroupService::delete($id)) {
                 $this->answer['mess'] = 'link';
                 $this->answer['data']['link'] = '/welcome';
                 $this->answer['status'] = 1;

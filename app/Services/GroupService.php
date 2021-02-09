@@ -3,6 +3,9 @@
 namespace App\Services;
 
 use App\Models\Group;
+use App\Services\ChannelService;
+use App\Repositories\ChannelRepo;
+use App\Repositories\GroupRepo;
 
 class GroupService extends BaseService {
 
@@ -20,10 +23,21 @@ class GroupService extends BaseService {
         return true;
     }
 
-    public static function delete($data) {
-        if ($group = Group::where( 'id', $data['id'] ) ) {
+    public static function delete($id) {
+        if ($group = GroupRepo::getOne($id) ) {
+
+            $channels = $group->channels;
+
+            foreach ($channels as $channel) {
+                ChannelService::delete($channel);
+            }
+            
+            //ChannelService::deleteAll( $group );
+            
             $group->delete();
+            
             return true;
+        
         } else {
             return false;
         }

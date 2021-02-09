@@ -21,9 +21,7 @@
 
 
 <div class="panel container">
-    <!-- 
     <div class="panel-button button" data-click="channel/delete/{{ $channel['id'] }}" data-name="name" data-content="{{ $channel['id'] }}">Удалить канал</div>
-    -->
 </div>
 
 
@@ -49,10 +47,14 @@
                     <td><img class="videoPik" src="{{ $item['pik'] }}" alt="{{ $item['title'] }}"></td>
                     <td>{{ $item['title'] }}</td>
                     <td><a target="_blank" href="https://youtube.com/video/{{ $item['v_id'] }}">{{ $item['v_id'] }}</a></td>
+                    <!-- 
+                    <td data-apiType="dayup" data-apiData="{{ $item['id'] }}"></td>
+                    <td data-apiType="delta" data-apiData="{{ $item['id'] }}"></td>
+                    -->
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{  round( $item['like_count'] / $item['dislike_count'], 2) }}</td>
+                    <td>{{ $item['comment_count'] }}</td>
                 </tr>
             @endforeach
         </tbody>

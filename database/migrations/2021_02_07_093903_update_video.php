@@ -14,8 +14,8 @@ class UpdateVideo extends Migration
     public function up()
     {
         Schema::table('video', function (Blueprint $table) {
-            $table->string('view_up'); // дата публикации
-            $table->string('pub_date'); // хешируем суточный прирост
+            $table->string('view_up'); // хешируем суточный прирост
+            $table->string('pub_date'); // дата публикации
         });
     }
 
