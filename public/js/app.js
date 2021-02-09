@@ -88,18 +88,6 @@ document.querySelectorAll('*[data-href]').forEach(function (div) {
     window.location = div.dataset.href;
   });
 });
-/*
-document.querySelectorAll('*[data-apiType]').forEach(td=>{
-    // запрос статистики
-    getdata('getstats/' + td.dataset.apiType, {
-        'id':td.dataset.apiData
-    },(ans)=>{
-        if (ans.status !== 1) {
-            showError(ans);
-        }
-    })
-})
-*/
 
 /***/ }),
 

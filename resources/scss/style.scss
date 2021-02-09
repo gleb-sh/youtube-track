@@ -113,8 +113,12 @@ input {
             }
         }
         th {
-            font-size: 21px;
+            font-size: 12px;
             padding: 5px !important;
+            span {
+                display: block;
+                width: 50px;
+            }
         }
         tbody {
             user-select: text;

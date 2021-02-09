@@ -1,7 +1,7 @@
 @extends('layouts.stats')
 
 
-@section('tite')
+@section('title')
     {{ $channel['title'] }}
 @endsection
 
@@ -14,7 +14,7 @@
 
 
 
-<h1 class="title">
+<h1 data-id="{{ $channel['id'] }}" class="title">
     <img class="title_ava" src="{{ $channel['medium'] }}" alt="{{ $channel['title'] }}">
     <span>Канал {{ $channel['title'] }} </span>
 </h1>
@@ -39,14 +39,14 @@
                 <!-- 
                 <th>Здесь будут дельты</th>
                 -->
-                @for ($i = 0; $i < 24; $i--)
-                    <th>к <span>
+                @for ($i = 0; $i < 24; $i++)
+                    <th><span>к 
                         @if ( ($header - $i )  >= 0 )
                             {{ $header - $i }}
                         @else
                             {{ $header - $i + 24 }}
                         @endif
-                        </span>
+                        :00</span>
                     </th>
                 @endfor
                 <th>Лайки / дизлайки</th>
@@ -59,22 +59,20 @@
                     <td><img class="videoPik" src="{{ $item['pik'] }}" alt="{{ $item['title'] }}"></td>
                     <td>{{ $item['title'] }}</td>
                     <td><a target="_blank" href="https://youtube.com/video/{{ $item['v_id'] }}">{{ $item['v_id'] }}</a></td>
-                    @for ($i = 0; $i < 24; $i--)
-                        <th data-videoId="{{ $item['id'] }}"
-                            data-timeTo="
+                    @for ($i = 0; $i < 24; $i++)
+                        <td data-videoid="{{ $item['id'] }}"
+                            data-timeto="
                                     @if ( ($header - $i)  >= 0 )
                                         {{ $header - $i }}
                                     @else
                                         {{ $header - $i + 24 }}
-                                    @endif">
-                        </th>
+                                    @endif">0</td>
                     @endfor
                     <td>
                         @isset($item['view_up'])
                            {{ $item['view_up'] }}
                         @endisset
                     </td>
-                    <td></td>
                     <td>
                         @if (isset ($item['like_count'] ) && isset($item['dislike_count']) && $item['dislike_count'] != 0 ) 
                             {{  round( $item['like_count'] / $item['dislike_count'], 2) }}
@@ -91,7 +89,7 @@
     </table>
 </div>
 
-
+<script src="/js/stats.js"></script>
 
     
 @endsection
