@@ -44,8 +44,12 @@ class ViewService extends BaseService {
             VideoService::setDayUp($video,$up);
 
         }
+    }
 
-
+    public static function getStats($video) {
+        return $stats = View::where([
+            'video_id'=>$video,
+        ])->limit(24)->get();
     }
 
 }

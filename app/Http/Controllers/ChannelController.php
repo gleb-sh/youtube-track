@@ -18,13 +18,25 @@ class ChannelController extends Controller
     public function test(Request $request, string $name)
     {
 
-        //$data = ChannelService::getVideoList($name);
-        //$data = $data[0]->id->videoId;
-        //$data = Youtube::getVideoInfo($name);
-        //$data = Youtube::getVideoInfo($name);
-        //$data = $data->statistics;
+        $id = $name;
 
-        //$data = ViewService::getTestStats($name);
+        $list = ChannelService::show($id);
+
+        // создать объект статистики
+        $stats = [];
+        // перебрать list
+        foreach ($list as $item) {
+            // вызвать отношение view под условием (limit 24)
+            $view = ViewService::getStats($item['id']);
+            // добавить его в объект статистики
+
+            foreach ($view as $v) {
+                $stats[ $item['id'] ][ $view[0]['time_to'] ] = $view[0]['count_up'];
+            }
+
+        }
+
+        $data = $stats;
 
         return view('vardump',compact('data'));
     }
@@ -33,16 +45,27 @@ class ChannelController extends Controller
         # show channel with data & without stats (for stats use api - getstats)
 
         $channel = ChannelRepo::getOneById($id);
-        // параметры сортировки
-        $sort = [
-            'by'=>'pub_date',
-            'type'=>'desc',
-        ];
-        // список без статистики
-        $list = VideoRepo::getByChannelId($id,$sort);
-        $list->toArray();
 
-        return view('channel',compact('channel','list'));
+        $list = ChannelService::show($id);
+
+        /*
+        // создать объект статистики
+        $stats = [];
+        // перебрать list
+        foreach ($list as $item) {
+            // вызвать отношение view под условием (limit 24)
+            $view = $item->views->orderBy('id','desc')->limit(24);
+            // добавить его в объект статистики
+            $stats[ $item['id'] ] = $view;
+        }
+        */
+
+
+        date_default_timezone_set('Europe/Moscow');
+
+        $header = date('H');
+
+        return view('channel',compact('channel','list','header'));
     }
     public function add(Request $request)
     {
@@ -96,6 +119,36 @@ class ChannelController extends Controller
                 $this->answer['data']['link'] = '/gr/' . $result;
                 $this->answer['status'] = 1;
             }
+        } catch (\Throwable $th) {
+            $this->answer['error'] = $th->getMessage() . ' ' . $th->getFile() . ' : ' . $th->getLine();
+        }
+
+        return $this->answerJson();
+
+    }
+    public function getstats(Request $request, string $id)
+    {
+
+        try {
+            $list = ChannelService::show($id);
+
+            // создать объект статистики
+            $stats = [];
+            // перебрать list
+            foreach ($list as $item) {
+                // вызвать отношение view под условием (limit 24)
+                $view = ViewService::getStats($item['id']);
+                // добавить его в объект статистики
+
+                foreach ($view as $v) {
+                    $stats[ $item['id'] ][ $view[0]['time_to'] ] = $view[0]['count_up'];
+                }
+            }
+
+            // вернуть объект статистики
+            $this->answer['data'] = $stats;
+            $this->answer['status'] = 1;
+
         } catch (\Throwable $th) {
             $this->answer['error'] = $th->getMessage() . ' ' . $th->getFile() . ' : ' . $th->getLine();
         }

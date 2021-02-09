@@ -11,8 +11,7 @@ class VideoRepo extends BaseRepo {
         return Video::where([
             'in_table'=>true,
             'channel_id'=>$id,
-            ])
-            ->orderBy($sort['by'],$sort['type'])
+        ])->orderBy($sort['by'],$sort['type'])
             ->get();
     }
 

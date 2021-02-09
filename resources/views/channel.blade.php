@@ -36,7 +36,19 @@
                 <th>Название</th>
                 <th>Youtube</th>
                 <th>Прирост за 24 часа</th>
+                <!-- 
                 <th>Здесь будут дельты</th>
+                -->
+                @for ($i = 0; $i < 24; $i--)
+                    <th>к <span>
+                        @if ( ($header - $i )  >= 0 )
+                            {{ $header - $i }}
+                        @else
+                            {{ $header - $i + 24 }}
+                        @endif
+                        </span>
+                    </th>
+                @endfor
                 <th>Лайки / дизлайки</th>
                 <th>Комменты</th>
             </tr>
@@ -47,18 +59,32 @@
                     <td><img class="videoPik" src="{{ $item['pik'] }}" alt="{{ $item['title'] }}"></td>
                     <td>{{ $item['title'] }}</td>
                     <td><a target="_blank" href="https://youtube.com/video/{{ $item['v_id'] }}">{{ $item['v_id'] }}</a></td>
-                    <!-- 
-                    <td data-apiType="dayup" data-apiData="{{ $item['id'] }}"></td>
-                    <td data-apiType="delta" data-apiData="{{ $item['id'] }}"></td>
-                    -->
+                    @for ($i = 0; $i < 24; $i--)
+                        <th data-videoId="{{ $item['id'] }}"
+                            data-timeTo="
+                                    @if ( ($header - $i)  >= 0 )
+                                        {{ $header - $i }}
+                                    @else
+                                        {{ $header - $i + 24 }}
+                                    @endif">
+                        </th>
+                    @endfor
+                    <td>
+                        @isset($item['view_up'])
+                           {{ $item['view_up'] }}
+                        @endisset
+                    </td>
                     <td></td>
-                    <td></td>
-                    @if (isset ($item['like_count'] ) && isset($item['dislike_count']) && $item['dislike_count'] != 0 ) 
-                        <td>{{  round( $item['like_count'] / $item['dislike_count'], 2) }}</td>
-                    @endif
-                    @isset($item['comment_count'])
-                        <td>{{ $item['comment_count'] }}</td>
-                    @endisset
+                    <td>
+                        @if (isset ($item['like_count'] ) && isset($item['dislike_count']) && $item['dislike_count'] != 0 ) 
+                            {{  round( $item['like_count'] / $item['dislike_count'], 2) }}
+                        @endif
+                    </td>
+                    <td>
+                        @isset($item['comment_count'])
+                            {{ $item['comment_count'] }}
+                        @endisset
+                    </td>
                 </tr>
             @endforeach
         </tbody>

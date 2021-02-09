@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Channel;
 use App\Repositories\ChannelRepo;
+use App\Repositories\VideoRepo;
 use Alaouy\Youtube\Facades\Youtube;
 use App\Services\VideoService;
 use App\Job\NewVideo;
@@ -107,6 +108,18 @@ class ChannelService extends BaseService {
 
         return $id;
 
+    }
+
+    public static function show($id)
+    {
+
+        // параметры сортировки
+        $sort = [
+            'by'=>'pub_date',
+            'type'=>'desc',
+        ];
+        // список без статистики
+        return $list = VideoRepo::getByChannelId($id,$sort);
     }
 
 
