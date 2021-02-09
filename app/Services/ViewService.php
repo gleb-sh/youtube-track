@@ -26,6 +26,7 @@ class ViewService extends BaseService {
             'time_to' => $v['time_to'] - 1,
         ])->first() ) {
             $v->count_up = $v['count'] - $last_v['count'];
+            $v->save();
         }
 
         // вычисление прироста за 24 часа
