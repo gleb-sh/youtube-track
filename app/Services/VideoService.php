@@ -35,18 +35,18 @@ class VideoService extends BaseService {
 
     }
 
-    public static function newByChannel($v_id,$c_id) {
+    public static function newByChannel($v_id,$cannel_id) {
 
         $data = Youtube::getVideoInfo($v_id);
 
         $v = new Video;
-        $v->v_id = $data->id->videoId;
-        $v->channel_id = $id;
+        $v->v_id = $data->id;
+        $v->channel_id = $cannel_id;
         $v->c_id = $data->snippet->channelId;
         $v->title = $data->snippet->title;
         $v->pub_date = $data->snippet->publishedAt;
         $v->pik = $data->snippet->thumbnails->default->url;
-        $v->comment_count = $data;
+        $v->comment_count = $data->statistics->commentCount;
         $v->like_count = $data->statistics->likeCount;
         $v->dislike_count = $data->statistics->dislikeCount;
         $v->save();
@@ -68,7 +68,7 @@ class VideoService extends BaseService {
         $v->title = $data->snippet->title;
         $v->pub_date = $data->snippet->publishedAt;
         $v->pik = $data->snippet->thumbnails->default->url;
-        $v->comment_count = $data;
+        $v->comment_count = $data->statistics->commentCount;
         $v->like_count = $data->statistics->likeCount;
         $v->dislike_count = $data->statistics->dislikeCount;
         $v->save();

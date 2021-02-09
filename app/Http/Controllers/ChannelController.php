@@ -9,18 +9,18 @@ use App\Repositories\VideoRepo;
 use App\Services\VideoService;
 use App\Services\GroupService;
 use App\Repositories\GroupRepo;
+use Alaouy\Youtube\Facades\Youtube;
 
 class ChannelController extends Controller
 {
     public function test(Request $request, string $name)
     {
 
-        $data = GroupService::delete($name);
-
-        //$data = GroupRepo::getOne($name);
-
         //$data = ChannelService::getVideoList($name);
-
+        //$data = $data[0]->id->videoId;
+        //$data = Youtube::getVideoInfo($name);
+        $data = Youtube::getVideoInfo($name);
+        $data = $data->statistics;
 
         return view('vardump',compact('data'));
     }
@@ -77,6 +77,7 @@ class ChannelController extends Controller
 
         } catch (\Throwable $th) {
             $this->answer['error'] = $th->getMessage() . ' ' . $th->getFile() . ' : ' . $th->getLine();
+            $this->answer['data'] = $th->getTrace();
         }
 
         return $this->answerJson();

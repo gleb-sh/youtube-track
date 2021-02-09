@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\View;
 
-class VideoService extends BaseService {
+class ViewService extends BaseService {
 
     public static function write($video,$count)
     {
@@ -17,12 +17,12 @@ class VideoService extends BaseService {
         $v->time_to = date('H');
         $v->save();
 
-        $last_v = View::where(['id',$v['id'] - 1]);
-
-        if ($last_v) {
-            $v->time_from = $last_v->time_to;
+        /*
+        if ( $last_v = View::where(['id',$v['id'] - 1]) ) {
+            $v->time_from = $last_v['time_to'];
             $v->save();
         }
+        */
 
     }
 

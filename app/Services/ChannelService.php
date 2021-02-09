@@ -43,7 +43,7 @@ class ChannelService extends BaseService {
 
     }
 
-    public static function create($data, $group)
+    public static function create($data, $groupID)
     {
 
         // создаём канал, записываем о нём общую инфрмацию
@@ -52,7 +52,7 @@ class ChannelService extends BaseService {
         $channel->title = $data->snippet->title;
         $channel->medium = $data->snippet->thumbnails->medium->url;
         $channel->subs_count = $data->statistics->subscriberCount;
-        $channel->group_id = $group;
+        $channel->group_id = $groupID;
         $channel->save();
 
         // получаем данные о всех видео
@@ -60,7 +60,9 @@ class ChannelService extends BaseService {
         // записываем данные о всех видосах
         foreach ($videos as $video) {
 
-            VideoService::newByChannel($video->id,$channel['id']);
+            //return response( var_dump($video) );
+
+            VideoService::newByChannel($video->id->videoId, $channel['id']);
             sleep(0.04);
             // добавить в очередь задачу по записи видоса в бд 
             //\dispatch( new NewVideo($video,$channel['id']) );

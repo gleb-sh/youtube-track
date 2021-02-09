@@ -13,7 +13,7 @@ class Video extends Model
 
     public function views()
     {
-        return $this->hasMany(Views::class,'video_id');
+        return $this->hasMany(View::class,'video_id');
     }
     
 }
