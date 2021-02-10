@@ -100,7 +100,7 @@ class VideoService extends BaseService {
         if (isset($data->statistics->dislikeCount)) {
             $v->dislike_count = $data->statistics->dislikeCount;
         }
-        //$v->save();
+        $v->save();
         // забор просмотров в нужную таблицу
         $count_up = ViewService::write($v['id'],$data->statistics->viewCount);
 
@@ -108,19 +108,18 @@ class VideoService extends BaseService {
         if ($count_up < Settings::where('name','in_table')->first() ) {
             $v->in_table = false;
             $v->no_check_count = $v['no_check_count'] + 1;
-            //$v->save();
+            $v->save();
         } else {
             $v->in_table = true;
             $v->no_check_count = 0;
-            //$v->save();
+            $v->save();
         }
 
         // исключаем из отслеживания те, которые тоже не могут нормально набрать
         if ($v->no_check_count == Settings::where('name','in_check') ) {
             $v->in_check = false;
+            $v->save();
         }
-
-        $v->save();
 
     }
 
