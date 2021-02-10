@@ -42,7 +42,9 @@ class Kernel extends ConsoleKernel
         })->hourly(45);
 
         // поиск новых видео
-
+        $schedule->call(function () {
+            ChannelService::updateVideoList();
+        })->hourly(30);
         
     }
 

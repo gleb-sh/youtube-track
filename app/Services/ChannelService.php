@@ -39,6 +39,23 @@ class ChannelService extends BaseService {
 
     }
 
+    public static function updateVideoList()
+    {
+        $channels = ChannelRepo::getAll();
+
+        foreach ($channels as $channel) {
+            $newlist = ChannelService::getVideoList($channel['c_id']);
+            foreach ($newlist as $item) {
+                // first or create
+                if (VideoRepo::getOneByYID($item->id->videoId)) {} else {
+                    VideoService::newByChannel($item->id->videoId,$channel['id']);
+                }
+            }
+        }
+
+        return true;
+    }
+
 
     public static function updateInfo($channel)
     {
@@ -74,12 +91,8 @@ class ChannelService extends BaseService {
         // записываем данные о всех видосах
         foreach ($videos as $video) {
 
-            //return response( var_dump($video) );
-
             VideoService::newByChannel($video->id->videoId, $channel['id']);
             sleep(0.04);
-            // добавить в очередь задачу по записи видоса в бд 
-            //\dispatch( new NewVideo($video,$channel['id']) );
 
         }
 

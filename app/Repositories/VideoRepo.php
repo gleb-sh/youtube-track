@@ -15,4 +15,18 @@ class VideoRepo extends BaseRepo {
             ->get();
     }
 
+    public static function getAllByChannelId($id)
+    {
+        return Video::where([
+            'channel_id'=>$id,
+        ])->get();
+    }
+
+    public static function getOneByYID($YID)
+    {
+        return Video::where([
+            'v_id'=>$YID,
+        ])->first();
+    }
+
 }
