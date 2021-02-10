@@ -12,17 +12,15 @@ use App\Repositories\ChannelRepo;
 use App\Repositories\VideoRepo;
 use App\Repositories\ViewRepo;
 use Alaouy\Youtube\Facades\Youtube;
+use App\Models\View;
 
 class ChannelController extends Controller
 {
     public function test(Request $request, string $name)
     {
 
-        //$data = VideoService::updateAll();
-
-        $data = Youtube::getVideoInfo($name);
-
-        $data = $data->id;
+        $data = View::orderBy('id','desc')->limit(1)->get();
+        $data = $data[0]['time_to'];
 
         return view('vardump',compact('data'));
     }
@@ -34,22 +32,7 @@ class ChannelController extends Controller
 
         $list = ChannelService::show($id);
 
-        /*
-        // создать объект статистики
-        $stats = [];
-        // перебрать list
-        foreach ($list as $item) {
-            // вызвать отношение view под условием (limit 24)
-            $view = $item->views->orderBy('id','desc')->limit(24);
-            // добавить его в объект статистики
-            $stats[ $item['id'] ] = $view;
-        }
-        */
-
-
-        date_default_timezone_set('Europe/Moscow');
-
-        $header = date('H');
+        $header = ViewService::lastTime();
 
         return view('channel',compact('channel','list','header'));
     }

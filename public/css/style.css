@@ -225,7 +225,7 @@ input:focus {
   font-size: 21px;
 }
 .preloader_circle {
-  height: 100px;
+  height: 150px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;

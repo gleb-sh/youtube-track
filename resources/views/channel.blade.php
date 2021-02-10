@@ -59,6 +59,11 @@
                     <td><img class="videoPik" src="{{ $item['pik'] }}" alt="{{ $item['title'] }}"></td>
                     <td>{{ $item['title'] }}</td>
                     <td><a target="_blank" href="https://youtube.com/video/{{ $item['v_id'] }}">{{ $item['v_id'] }}</a></td>
+                    <td>
+                        @isset($item['view_up'])
+                           {{ $item['view_up'] }}
+                        @endisset
+                    </td>
                     @for ($i = 0; $i < 24; $i++)
                         <td data-videoid="{{ $item['id'] }}"
                             data-timeto="
@@ -68,11 +73,6 @@
                                         {{ $header - $i + 24 }}
                                     @endif">0</td>
                     @endfor
-                    <td>
-                        @isset($item['view_up'])
-                           {{ $item['view_up'] }}
-                        @endisset
-                    </td>
                     <td>
                         @if (isset ($item['like_count'] ) && isset($item['dislike_count']) && $item['dislike_count'] != 0 ) 
                             {{  round( $item['like_count'] / $item['dislike_count'], 2) }}

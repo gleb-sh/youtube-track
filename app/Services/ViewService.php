@@ -53,4 +53,13 @@ class ViewService extends BaseService {
         ])->limit(24)->get();
     }
 
+    public static function lastTime() {
+        if  ( $view = View::orderBy('id','desc')->limit(1)->get() ) {
+            return $view[0]['time_to'];
+        } else {
+            date_default_timezone_set('Europe/Moscow');
+            return date('H');
+        }
+    }
+
 }

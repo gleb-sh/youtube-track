@@ -1,7 +1,7 @@
 <div class="preloader">
     <div class="preloader_title">Получаем данные...</div>
     <div class="preloader_circle">
-        <span>ytrack</span>
+        <span>youtube-track</span>
     </div>
 </div>
 <div class="afterwait">
