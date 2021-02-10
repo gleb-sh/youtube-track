@@ -105,7 +105,8 @@ class VideoService extends BaseService {
         $count_up = ViewService::write($v['id'],$data->statistics->viewCount);
 
         // исключаем из вывода те, которые не могу нормально набрать
-        if ($count_up < Settings::where('name','in_table')->first() ) {
+        $set1 = Settings::where('name','in_table')->first();
+        if ( $count_up < $set1['value'] ) {
             $v->in_table = false;
             $v->no_check_count = $v['no_check_count'] + 1;
             $v->save();
@@ -116,7 +117,8 @@ class VideoService extends BaseService {
         }
 
         // исключаем из отслеживания те, которые тоже не могут нормально набрать
-        if ($v->no_check_count == Settings::where('name','in_check') ) {
+        $set2 = Settings::where('name','in_check')->first();
+        if ($v->no_check_count == $set2['value']) {
             $v->in_check = false;
             $v->save();
         }

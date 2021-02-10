@@ -21,11 +21,7 @@ class ChannelController extends Controller
     public function test(Request $request, string $name)
     {
 
-        $data = SettingsService::rewrite(
-            ['in_table'=>3],
-            ['in_check'=>3000]
-        );
-
+        $data = VideoService::updateAll();
         return view('vardump',compact('data'));
 
     }
