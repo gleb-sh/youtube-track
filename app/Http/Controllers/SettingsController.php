@@ -13,7 +13,9 @@ class SettingsController extends Controller
     {
         $set = [];
         $set['in_table'] = Settings::where('name','in_table')->first();
+        $set['in_table'] = $set['in_table']['value'];
         $set['in_check'] = Settings::where('name','in_check')->first();
+        $set['in_check'] = $set['in_check']['value'];
         return view('settings',compact('set'));
     }
     public function rewrite(Request $request)
