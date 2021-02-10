@@ -38,13 +38,6 @@ class ChannelController extends Controller
 
         $data = $stats;
 
-        // $list = $list->toArray();
-
-        // $data = ViewService::getStats( $list[0]['id'] );
-
-        // $data = $data[0]['time_to'];
-
-
         return view('vardump',compact('data'));
 
     }
@@ -123,18 +116,21 @@ class ChannelController extends Controller
     {
 
         try {
+            
             $list = ChannelService::show($id);
 
             // создать объект статистики
             $stats = [];
             // перебрать list
+            $list = $list->toArray();
+    
             foreach ($list as $item) {
                 // вызвать отношение view под условием (limit 24)
                 $view = ViewService::getStats($item['id']);
                 // добавить его в объект статистики
-
+    
                 foreach ($view as $v) {
-                    $stats[ $item['id'] ][ $view[0]['time_to'] ] = $view[0]['count_up'];
+                    $stats[ $item['id'] ][ $v['time_to'] ] = $v['count_up'];
                 }
             }
 
