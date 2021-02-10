@@ -26,11 +26,24 @@ class ChannelService extends BaseService {
 
     } 
 
+    public static function updateAll()
+    {
+        $channels = ChannelRepo::getAll();
 
-    public static function updateInfo($id)
+        foreach ($channels as $channel) {
+            ChannelService::updateInfo($channel);
+            \sleep(0.1);
+        }
+
+        return true;
+
+    }
+
+
+    public static function updateInfo($channel)
     {
 
-        $channel = ChannelRepo::getOneById($id);
+        //$channel = ChannelRepo::getOneById($id);
 
         $data = ChannelService::getInfoById($channel->c_id);
 

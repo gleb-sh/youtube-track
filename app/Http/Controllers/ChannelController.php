@@ -21,7 +21,7 @@ class ChannelController extends Controller
     public function test(Request $request, string $name)
     {
 
-        $data = VideoService::updateAll();
+        $data = ChannelService::updateAll();
 
         
         return view('vardump',compact('data'));

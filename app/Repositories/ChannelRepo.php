@@ -17,4 +17,9 @@ class ChannelRepo extends BaseRepo {
         return Channel::where('id',$id)->first();
     }
 
+    public static function getAll()
+    {
+        return Channel::all();
+    }
+
 }
