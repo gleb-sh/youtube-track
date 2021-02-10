@@ -3,40 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Services\GroupService;
 use App\Services\ChannelService;
 use App\Services\VideoService;
 use App\Services\ViewService;
+use App\Services\SettingsService;
 use App\Repositories\GroupRepo;
 use App\Repositories\ChannelRepo;
 use App\Repositories\VideoRepo;
 use App\Repositories\ViewRepo;
 use Alaouy\Youtube\Facades\Youtube;
 
+
 class ChannelController extends Controller
 {
     public function test(Request $request, string $name)
     {
-        $id = $name;
 
-        $list = ChannelService::show($id);
-
-        // создать объект статистики
-        $stats = [];
-        // перебрать list
-        $list = $list->toArray();
-
-        foreach ($list as $item) {
-            // вызвать отношение view под условием (limit 24)
-            $view = ViewService::getStats($item['id']);
-            // добавить его в объект статистики
-
-            foreach ($view as $v) {
-                $stats[ $item['id'] ][ $v['time_to'] ] = $v['count_up'];
-            }
-        }
-
-        $data = $stats;
+        $data = SettingsService::rewrite(
+            ['in_table'=>3],
+            ['in_check'=>3000]
+        );
 
         return view('vardump',compact('data'));
 

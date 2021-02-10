@@ -16,7 +16,7 @@
 
 <h1 data-id="{{ $channel['id'] }}" class="title">
     <img class="title_ava" src="{{ $channel['medium'] }}" alt="{{ $channel['title'] }}">
-    <span>Канал {{ $channel['title'] }} </span>
+    <span>Канал {{ $channel['title'] }}</span>
 </h1>
 
 

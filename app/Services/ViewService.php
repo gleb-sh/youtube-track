@@ -21,11 +21,14 @@ class ViewService extends BaseService {
 
         // вычисление прироста
 
+        $count_up = '0';
+
         if ( $last_v = View::where([
             'video_id' => $video,
             'time_to' => $v['time_to'] - 1,
         ])->first() ) {
-            $v->count_up = $v['count'] - $last_v['count'];
+            $count_up = $v['count'] - $last_v['count'];
+            $v->count_up = $count_up;
             $v->save();
         }
 
@@ -45,6 +48,9 @@ class ViewService extends BaseService {
             VideoService::setDayUp($video,$up);
 
         }
+
+        return $count_up;
+        
     }
 
     public static function getStats($video) {

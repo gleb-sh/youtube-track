@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\SettingsController;
 
 
 
@@ -32,9 +32,7 @@ Route::middleware('Auth')->group(function() {
 
     Route::get('/ch/{id}',[ChannelController::class,'show']);
 
-    Route::get('settings', function () {
-        return view('settings');
-    });
+    Route::get('settings',[SettingsController::class,'show']);
 
 
     // api
@@ -48,6 +46,6 @@ Route::middleware('Auth')->group(function() {
 
     Route::post('api/getstats/{id}',[ChannelController::class,'getstats']);
 
-
+    Route::post('api/settings',[SettingsController::class,'rewrite']); 
 
 });

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Video;
+use App\Models\Settings;
 use App\Services\ViewService;
 use Alaouy\Youtube\Facades\Youtube;
 
@@ -99,10 +100,27 @@ class VideoService extends BaseService {
         if (isset($data->statistics->dislikeCount)) {
             $v->dislike_count = $data->statistics->dislikeCount;
         }
-        $v->save();
-        // ++ забор просмотров в нужную таблицу
+        //$v->save();
+        // забор просмотров в нужную таблицу
+        $count_up = ViewService::write($v['id'],$data->statistics->viewCount);
 
-        ViewService::write($v['id'],$data->statistics->viewCount);
+        // исключаем из вывода те, которые не могу нормально набрать
+        if ($count_up < Settings::where('name','in_table')->first() ) {
+            $v->in_table = false;
+            $v->no_check_count = $v['no_check_count'] + 1;
+            //$v->save();
+        } else {
+            $v->in_table = true;
+            $v->no_check_count = 0;
+            //$v->save();
+        }
+
+        // исключаем из отслеживания те, которые тоже не могут нормально набрать
+        if ($v->no_check_count == Settings::where('name','in_check') ) {
+            $v->in_check = false;
+        }
+
+        $v->save();
 
     }
 
@@ -118,9 +136,6 @@ class VideoService extends BaseService {
         foreach ($videos as $video) {
             VideoService::update($video);
         }
-        // перебираем все видосы и проверяем на конрольные значения
-        // исключаем из отслеживания те, которые не могу нормально набрать
-        // исключаем из вывода те, которые тоже не могут нормально набрать
 
         return true;
     }

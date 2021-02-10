@@ -216,6 +216,10 @@ input:focus {
   color: goldenrod;
 }
 .afterwait_text {
+  -webkit-user-select: text;
+     -moz-user-select: text;
+      -ms-user-select: text;
+          user-select: text;
   color: #e9eff5;
   font-size: 12px;
 }
@@ -265,4 +269,15 @@ input:focus {
   100% {
     transform: rotate(360deg);
   }
+}
+.settings {
+  margin-top: 20px;
+}
+.settings form {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.settings form p, .settings form input, .settings form button {
+  display: block;
+  margin: 10px;
 }

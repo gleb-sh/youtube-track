@@ -16,7 +16,7 @@
 
     <div class="header">
         <div class="header-nav container">
-            <a href="#" class="header-nav_button">
+            <a href="/settings" class="header-nav_button">
                 <span>Настройки</span>
             </a>
 
