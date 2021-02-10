@@ -66,7 +66,9 @@ class ChannelService extends BaseService {
 
         $channel->title = $data->snippet->title;
         $channel->medium = $data->snippet->thumbnails->medium->url;
-        $channel->subs_count = $data->statistics->subscriberCount;
+        if ($data->statistics->hiddenSubscriberCount !== true) {
+            $channel->subs_count = $data->statistics->subscriberCount;
+        }
 
         $channel->save();
 
@@ -82,7 +84,9 @@ class ChannelService extends BaseService {
         $channel->c_id = $data->id;
         $channel->title = $data->snippet->title;
         $channel->medium = $data->snippet->thumbnails->medium->url;
-        $channel->subs_count = $data->statistics->subscriberCount;
+        if ($data->statistics->hiddenSubscriberCount !== true) {
+            $channel->subs_count = $data->statistics->subscriberCount;
+        }
         $channel->group_id = $groupID;
         $channel->save();
 
