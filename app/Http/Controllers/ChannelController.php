@@ -18,11 +18,27 @@ class ChannelController extends Controller
 {
     public function test(Request $request, string $name)
     {
+        $id = $name;
 
-        $data = View::orderBy('id','desc')->limit(1)->get();
-        $data = $data[0]['time_to'];
+        $list = ChannelService::show($id);
+
+        // создать объект статистики
+        $stats = [];
+        // перебрать list
+        foreach ($list as $item) {
+            // вызвать отношение view под условием (limit 24)
+            $view = ViewService::getStats($item['id']);
+            // добавить его в объект статистики
+
+            foreach ($view as $v) {
+                $stats[ $item['id'] ][ $view[0]['time_to'] ] = $view[0]['count_up'];
+            }
+        }
+
+        $data = $stats;
 
         return view('vardump',compact('data'));
+        
     }
     public function show(Request $request, string $id)
     {
