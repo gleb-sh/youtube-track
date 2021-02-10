@@ -39,12 +39,12 @@
                 <!-- 
                 <th>Здесь будут дельты</th>
                 -->
-                @for ($i = 0; $i < 24; $i++)
+                @for ($i = 1; $i < 25; $i++)
                     <th><span>к 
-                        @if ( ($header - $i )  >= 0 )
-                            {{ $header - $i }}
+                        @if ( ($header + $i ) < 24 )
+                            {{ $header + $i }}
                         @else
-                            {{ $header - $i + 24 }}
+                            {{ $header + $i - 24 }}
                         @endif
                         :00</span>
                     </th>
@@ -64,14 +64,14 @@
                            {{ $item['view_up'] }}
                         @endisset
                     </td>
-                    @for ($i = 0; $i < 24; $i++)
+                    @for ($i = 1; $i < 25; $i++)
                         <td data-videoid="{{ $item['id'] }}"
                             data-timeto="
-                                    @if ( ($header - $i)  >= 0 )
-                                        {{ $header - $i }}
-                                    @else
-                                        {{ $header - $i + 24 }}
-                                    @endif">0</td>
+                                @if ( ($header + $i ) < 24 )
+                                    {{ $header + $i }}
+                                @else
+                                    {{ $header + $i - 24 }}
+                                @endif">0</td>
                     @endfor
                     <td>
                         @if (isset ($item['like_count'] ) && isset($item['dislike_count']) && $item['dislike_count'] != 0 ) 
