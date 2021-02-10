@@ -66,7 +66,10 @@
                     </td>
                     @for ($i = 1; $i < 25; $i++)
                         <td data-videoid="{{ $item['id'] }}"
-                            data-timeto="@if ( ($header + $i ) < 24 ){{ $header + $i }}@else{{ $header + $i - 24 }}@endif">0</td>
+                            data-timeto="@if ( ($header + $i ) < 24 )@if ( ($header + $i) < 10 ){{ '0' . ($header + $i) }}@else{{ $header + $i }}@endif
+                            @else
+                            @if ( ($header + $i - 24) < 10 ){{ '0' . ($header + $i - 24) }}@else{{ $header + $i - 24 }}@endif
+                            @endif">0</td>
                     @endfor
                     <td>
                         @if (isset ($item['like_count'] ) && isset($item['dislike_count']) && $item['dislike_count'] != 0 ) 

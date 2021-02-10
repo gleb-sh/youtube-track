@@ -37,7 +37,7 @@ getdata('getstats/' + document.querySelector('h1').dataset.id, {}, function (ans
 
     document.querySelectorAll('td[data-videoid]').forEach(function (td) {
       //console.log(td.dataset.videoid + ' : ' + td.dataset.timeto)
-      td.innerHTML = stats[td.dataset.videoid][td.dataset.timeto] || 0;
+      td.innerHTML = stats[td.dataset.videoid][td.dataset.timeto.trim()] || 0;
     });
   } else {
     showError(ans.mess);
