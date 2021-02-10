@@ -16,7 +16,7 @@
 
 <div class="container settings">
     <form data-method="settings">
-        <p>Нижний порог вывода</p>
+        <p>Нижний порог вывода (просмотров за последний час)</p>
         <input type="number" min="0" name="in_table" value="{{ $set['in_table'] }}">
         <p>Дни недостижения до прекращений отслеживания</p>
         <input type="number" min="1" name="in_check" value="{{ $set['in_check'] }}">

@@ -21,7 +21,7 @@ class SettingsService extends BaseService {
 
             Settings::updateOrCreate(
                 ['name'=>'in_check'],
-                ['value'=>$data['in_check']]
+                ['value'=>$data['in_check'] * 24]
             );
             
         }
