@@ -36,7 +36,7 @@ getdata('getstats/' + document.querySelector('h1').dataset.id, {}, function (ans
   if (ans.status === 1) {
     stats = ans.data;
     console.log(stats);
-    document.querySelectorAll('td[data-videoId]').forEach(function (td) {
+    document.querySelectorAll('td[data-videoid]').forEach(function (td) {
       //console.log(td.dataset.videoid + ' : ' + td.dataset.timeto)
       td.innerHTML = stats[td.dataset.videoid][td.dataset.timeto] || 0;
     });

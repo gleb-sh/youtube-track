@@ -39,7 +39,7 @@ getdata('getstats/' + document.querySelector('h1').dataset.id, {},(ans)=>{
     if (ans.status === 1) {
         stats = ans.data
         console.log(stats)
-        document.querySelectorAll('td[data-videoId]').forEach(td=>{
+        document.querySelectorAll('td[data-videoid]').forEach(td=>{
             //console.log(td.dataset.videoid + ' : ' + td.dataset.timeto)
             td.innerHTML = stats[td.dataset.videoid][td.dataset.timeto] || 0;
         })
