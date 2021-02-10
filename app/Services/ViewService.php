@@ -24,9 +24,9 @@ class ViewService extends BaseService {
         $count_up = '0';
 
         if ( $last_v = View::where([
+            [ 'id', '<', $v['id'] ],
             'video_id' => $video,
-            'time_to' => $v['time_to'] - 1,
-        ])->first() ) {
+        ])->orderBy('id','desc')->first() ) {
             $count_up = $v['count'] - $last_v['count'];
             $v->count_up = $count_up;
             $v->save();

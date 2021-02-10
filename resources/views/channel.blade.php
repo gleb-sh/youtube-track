@@ -40,7 +40,11 @@
                 <th>Здесь будут дельты</th>
                 -->
                 @for ($i = 1; $i < 25; $i++)
-                    <th><span>к 
+                    <th><span>с @if ( ($header + $i - 1) < 24 )
+                        {{ $header + $i - 1 }}
+                    @else
+                        {{ $header + $i -1 - 24 }}
+                    @endif:00<br>по 
                         @if ( ($header + $i ) < 24 )
                             {{ $header + $i }}
                         @else

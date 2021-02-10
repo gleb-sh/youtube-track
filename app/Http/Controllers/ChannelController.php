@@ -22,6 +22,8 @@ class ChannelController extends Controller
     {
 
         $data = VideoService::updateAll();
+
+        
         return view('vardump',compact('data'));
 
     }
