@@ -50,7 +50,7 @@ class ViewService extends BaseService {
     public static function getStats($video) {
         return $stats = View::where([
             'video_id'=>$video,
-        ])->limit(24)->get();
+        ])->orderBy('id','desc')->limit(24)->get();
     }
 
     public static function lastTime() {

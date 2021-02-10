@@ -12,7 +12,6 @@ use App\Repositories\ChannelRepo;
 use App\Repositories\VideoRepo;
 use App\Repositories\ViewRepo;
 use Alaouy\Youtube\Facades\Youtube;
-use App\Models\View;
 
 class ChannelController extends Controller
 {
@@ -25,20 +24,29 @@ class ChannelController extends Controller
         // создать объект статистики
         $stats = [];
         // перебрать list
+        $list = $list->toArray();
+
         foreach ($list as $item) {
             // вызвать отношение view под условием (limit 24)
             $view = ViewService::getStats($item['id']);
             // добавить его в объект статистики
 
             foreach ($view as $v) {
-                $stats[ $item['id'] ][ $view[0]['time_to'] ] = $view[0]['count_up'];
+                $stats[ $item['id'] ][ $v['time_to'] ] = $v['count_up'];
             }
         }
 
         $data = $stats;
 
+        // $list = $list->toArray();
+
+        // $data = ViewService::getStats( $list[0]['id'] );
+
+        // $data = $data[0]['time_to'];
+
+
         return view('vardump',compact('data'));
-        
+
     }
     public function show(Request $request, string $id)
     {
