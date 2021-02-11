@@ -59,7 +59,9 @@
         </thead>
         <tbody>
             @foreach ($list as $item)
-                <tr>
+                <tr @if ( ( time() - strtotime($item['pubdate']) ) < 84600 )
+                    class="hot"
+                @endif>
                     <td><img class="videoPik" src="{{ $item['pik'] }}" alt="{{ $item['title'] }}"></td>
                     <td>{{ $item['title'] }}</td>
                     <td><a target="_blank" href="https://youtube.com/video/{{ $item['v_id'] }}">{{ $item['v_id'] }}</a></td>

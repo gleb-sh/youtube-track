@@ -28,9 +28,7 @@ class ChannelController extends Controller
     }
     public function test(Request $request, string $name)
     {
-
-        $data = ChannelService::getInfoById($name);
-
+        $data = Youtube::listChannelVideos($name,'50');
         
         return view('vardump',compact('data'));
 
