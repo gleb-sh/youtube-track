@@ -22,7 +22,7 @@ class ChannelService extends BaseService {
     public static function getVideoList($c_id) 
     {
 
-        return Youtube::listChannelVideos($c_id, '50');
+        return Youtube::listChannelVideos($c_id, '30');
 
     } 
 
