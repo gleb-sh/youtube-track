@@ -39,12 +39,12 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function () {
             ChannelService::updateAll();
-        })->hourly();
+        })->hourlyAt(15);
 
         // поиск новых видео
         $schedule->call(function () {
             ChannelService::updateVideoList();
-        })->hourly();
+        })->hourlyAt(45);
         
     }
 

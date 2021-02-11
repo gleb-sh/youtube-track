@@ -49,8 +49,10 @@ class ChannelService extends BaseService {
                 // first or create
                 if (VideoRepo::getOneByYID($item->id->videoId)) {} else {
                     VideoService::newByChannel($item->id->videoId,$channel['id']);
+                    \sleep(0.04);
                 }
             }
+            \sleep(0.04);
         }
 
         return true;
