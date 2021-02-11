@@ -19,10 +19,14 @@ Route::middleware('NoAuth')->group(function() {
 
 });
 
-Route::get('test/{name}',[ChannelController::class,'test']);
 
 
 Route::middleware('Auth')->group(function() {
+
+    Route::get('test/{name}',[ChannelController::class,'test']);
+    Route::get('update/c',[ChannelController::class,'updateC']);
+    Route::get('update/l',[ChannelController::class,'updateL']);
+
 
     Route::get('logout',[UserController::class,'logout']);
 

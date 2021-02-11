@@ -18,6 +18,14 @@ use Alaouy\Youtube\Facades\Youtube;
 
 class ChannelController extends Controller
 {
+    public static function updateC()
+    {
+        ChannelService::updateAll();
+    }
+    public static function updateL()
+    {
+        ChannelService::updateVideoList();
+    }
     public function test(Request $request, string $name)
     {
 
