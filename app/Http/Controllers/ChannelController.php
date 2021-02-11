@@ -28,7 +28,20 @@ class ChannelController extends Controller
     }
     public function test(Request $request, string $name)
     {
-        $data = Youtube::listChannelVideos($name,'50');
+
+        $id = $name;
+
+        $channel = ChannelRepo::getOneById($id);
+
+        $list = ChannelService::show($id);
+
+        $list->toArray();
+
+        $data['title'] = $list[0]['title'];
+        $data['pubda'] = $list[0]['pub_date'];
+        $data['vi'] = strtotime( $list[0]['pub_date'] );
+        $data['cur'] = time();
+        $data['dif'] = $data['cur'] - $data['vi'];
         
         return view('vardump',compact('data'));
 
@@ -49,8 +62,6 @@ class ChannelController extends Controller
     {
 
         $data = $request->json()->all();
-
-        // string $data['name'] - channel name or channel id (update: only ID)
 
         try {
 
@@ -111,22 +122,21 @@ class ChannelController extends Controller
             
             $list = ChannelService::show($id);
 
-            // создать объект статистики
+
             $stats = [];
-            // перебрать list
+
             $list = $list->toArray();
     
             foreach ($list as $item) {
-                // вызвать отношение view под условием (limit 24)
+
                 $view = ViewService::getStats($item['id']);
-                // добавить его в объект статистики
+
     
                 foreach ($view as $v) {
                     $stats[ $item['id'] ][ $v['time_to'] ] = $v['count_up'];
                 }
             }
 
-            // вернуть объект статистики
             $this->answer['data'] = $stats;
             $this->answer['status'] = 1;
 

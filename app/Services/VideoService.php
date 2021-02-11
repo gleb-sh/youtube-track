@@ -73,7 +73,7 @@ class VideoService extends BaseService {
         }
         $v->save();
 
-        // ++ забор просмотров в нужную таблицу
+        // забор просмотров в нужную таблицу
 
         ViewService::write($v['id'],$data->statistics->viewCount);
 

@@ -45,3 +45,7 @@ getdata('getstats/' + document.querySelector('h1').dataset.id, {},(ans)=>{
         showError(ans.mess)
     }
 })
+
+document.querySelectorAll('tr[data-info]').forEach(tr=>{
+    if (tr.dataset.info == 1) tr.classList.add('hot')
+})

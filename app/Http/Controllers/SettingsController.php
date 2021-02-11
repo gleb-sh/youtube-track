@@ -22,8 +22,6 @@ class SettingsController extends Controller
     {
         $data = $request->json()->all();
 
-        //$data = $data['data'];
-
         try {
             if (SettingsService::rewrite($data) ) {
                 $this->answer['status'] = 1;

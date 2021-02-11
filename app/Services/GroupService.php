@@ -32,8 +32,6 @@ class GroupService extends BaseService {
                 ChannelService::delete($channel);
             }
             
-            //ChannelService::deleteAll( $group );
-            
             $group->delete();
             
             return true;

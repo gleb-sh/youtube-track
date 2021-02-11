@@ -62,8 +62,6 @@ class ChannelService extends BaseService {
     public static function updateInfo($channel)
     {
 
-        //$channel = ChannelRepo::getOneById($id);
-
         $data = ChannelService::getInfoById($channel->c_id);
 
         $channel->title = $data->snippet->title;

@@ -59,9 +59,7 @@
         </thead>
         <tbody>
             @foreach ($list as $item)
-                <tr @if ( ( time() - strtotime($item['pubdate']) ) < 84600 )
-                    class="hot"
-                @endif>
+                <tr data-info="{{ ( ( time() - strtotime($item['pub_date']) ) - (86400 * 2) < 0 ) }}">
                     <td><img class="videoPik" src="{{ $item['pik'] }}" alt="{{ $item['title'] }}"></td>
                     <td>{{ $item['title'] }}</td>
                     <td><a target="_blank" href="https://youtube.com/video/{{ $item['v_id'] }}">{{ $item['v_id'] }}</a></td>
@@ -79,7 +77,7 @@
                     @endfor
                     <td>
                         @if (isset ($item['like_count'] ) && isset($item['dislike_count']) && $item['dislike_count'] != 0 ) 
-                            {{  round( $item['like_count'] / $item['dislike_count'], 2) }}
+                            {{  round( $item['like_count'] / ($item['dislike_count'] + $item['like_count']) , 2) * 100 }}%
                         @endif
                     </td>
                     <td>

@@ -43,5 +43,8 @@ getdata('getstats/' + document.querySelector('h1').dataset.id, {}, function (ans
     showError(ans.mess);
   }
 });
+document.querySelectorAll('tr[data-info]').forEach(function (tr) {
+  if (tr.dataset.info == 1) tr.classList.add('hot');
+});
 /******/ })()
 ;
